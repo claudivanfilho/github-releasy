@@ -46,6 +46,7 @@
       if (branchNameScaped !== baseBranch) {
         console.log(chalk.yellow(`Build is from a pull request event`))
         await GithubReleasy.checkChangelog()
+        console.log(chalk.yellow(`CHANGELOG.md is OK!`))
       // Otherwise is from a push in the baseBranch
       } else {
         console.log(chalk.yellow(`Build is from a push event`))
