@@ -27,11 +27,13 @@ CMD options available:
 Automatize your workflow! Use the github-releasy to update you npm version, release, tag, changelog and publish to npm after a pull request to the base branch is merged.
 
 #### How it works?
+After a pull request has been updated the github-release checks if the branch have unreleased changes in the CHANGELOD.md, if not, fails the buils.
+
 After a pull request is merged in the github, the event of push event is triggered in the CI and github release check the pattern in the last commit to verify the origin of the pull request and so to decide which the releaseType will be fired and released. Patch if the origin of the pull request is from a branch different of the base branch e Minor if the origin branch is from the minorBranch.
 
 #### Configuration
 
-In the Setup put the commands
+In the Setup put the commands:
 ```
 $ npm install
 $ npm install -g npx github-releasy
@@ -39,7 +41,7 @@ $ git config --global user.email "<github email here>"
 $ git config --global user.name "<github name here>"
 ```
 
-In the Job put the commands
+In the Job put the commands:
 ```
 $ export GITHUB_TOKEN=<your github token here>
 $ github-releasy --ci
