@@ -21,11 +21,6 @@
     // CHECK IF THE BRANCH IS SYNC WITH THE BASE
     const releaseType = options.releaseType
     const isSyncWithBase = await GithubReleasy.isSyncWithBase(options)
-    if (!isSyncWithBase) {
-      console.log(chalk.red('Cannot proceed with release. Branch is not sync with master'));
-      process.exit(0)
-      return
-    }
     // RELEASE IN THE COMMAND LINE
     if (releaseType) {
       switch(releaseType) {
@@ -39,18 +34,25 @@
           await GithubReleasy.publishMajor(options)
           break
       }
-      process.exit(1)
-    // RELEASE IN THE CI ENVIRONMENT
+      process.exit(0)
+      // RELEASE IN THE CI ENVIRONMENT
     } else if (options.ci) {
       const branchName = await GithubReleasy.getBranchName()
       const baseBranch = options.baseBranch || 'master'
       const branchNameScaped = branchName.replace(/\n/g, '').trim()
       // Check if is from a pull request
       if (branchNameScaped !== baseBranch) {
+        console.log(chalk.yellow(`Build is from a pull request event`))
+        if (!isSyncWithBase) {
+          console.log(chalk.red('Cannot proceed with release. Branch is not sync with master'));
+          process.exit(1)
+          return
+        }
         await GithubReleasy.checkChangelog()
         console.log(chalk.yellow(`Will not publish because the branch ${branchNameScaped} is different of the baseBranch ${baseBranch}.`))
       // Otherwise is from a push in the baseBranch
       } else {
+        console.log(chalk.yellow(`Build is from a push event`))
         if (!GithubReleasy.hasUnreleased(options)) {
           console.log(chalk.red('Will not publish because there isn\'t unreleased changes in changelog.'))
           process.exit(0)
@@ -59,7 +61,7 @@
       }
       await GithubReleasy.publishFromCI(options)
       process.exit(0)
-    // THROW AN ERROR
+    // DOES NOTHING, JUST LOG IT
     } else {
       console.log(chalk.red('Cannot proceed with release. You must specify the --releaseType or --ci option'))
       process.exit(0)
