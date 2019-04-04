@@ -23,6 +23,11 @@
     const isSyncWithBase = await GithubReleasy.isSyncWithBase(options)
     // RELEASE IN THE COMMAND LINE
     if (releaseType) {
+      if (!isSyncWithBase) {
+        console.log(chalk.red('Cannot proceed with release. Branch is not sync with master'));
+        process.exit(1)
+        return
+      }
       switch(releaseType) {
         case 'patch':
           await GithubReleasy.publishPatch(options)
@@ -43,11 +48,6 @@
       // Check if is from a pull request
       if (branchNameScaped !== baseBranch) {
         console.log(chalk.yellow(`Build is from a pull request event`))
-        if (!isSyncWithBase) {
-          console.log(chalk.red('Cannot proceed with release. Branch is not sync with master'));
-          process.exit(1)
-          return
-        }
         await GithubReleasy.checkChangelog()
         console.log(chalk.yellow(`Will not publish because the branch ${branchNameScaped} is different of the baseBranch ${baseBranch}.`))
       // Otherwise is from a push in the baseBranch
