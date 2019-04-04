@@ -1,0 +1,35 @@
+{
+  "name": "github-releasy",
+  "version": "1.0.39",
+  "description": "A npm package to help with release and changelog management over github repositories",
+  "main": "index.js",
+  "bin": "cli.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/claudivanfilho/github-releasy.git"
+  },
+  "keywords": [
+    "github",
+    "npm",
+    "release",
+    "version",
+    "management",
+    "changelog"
+  ],
+  "author": "Claudivan Filho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudivanfilho/github-releasy/issues"
+  },
+  "homepage": "https://github.com/claudivanfilho/github-releasy#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "child_process": "^1.0.2",
+    "fs": "0.0.1-security",
+    "npx": "^10.2.0",
+    "release-it": "^10.3.1",
+    "version-changelog": "^3.1.1",
+    "yargs-parser": "^13.0.0"
+  }
+}
