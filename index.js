@@ -30,9 +30,7 @@ const getCmdOptions = (releaseMode, options) => {
   const beforeStage = options.beforeStage || ''
   const beforeStageCmd = `--scripts.beforeStage="${beforeStage}${beforeStage && ' ' || ''}npx version-changelog CHANGELOG.md --remote github && git add CHANGELOG.md"`
   const githubReleaseCmd = '--github.release=true'
-  let cmdOptions = `${beforeStageCmd} --no-git.requireCleanWorkingDir --use=pkg.version ${githubReleaseCmd} -n`
-
-  !options.npmPublish && (cmdOptions += ' --no-npm.publish')
+  let cmdOptions = `${beforeStageCmd} --no-git.requireCleanWorkingDir --use=pkg.version ${githubReleaseCmd}  --no-npm.publish -n`
 
   if (releaseMode === 'PATCH') {
     cmdOptions += ` --git.tagName='v${getNewPatchVersion(getNpmVersion())}'`

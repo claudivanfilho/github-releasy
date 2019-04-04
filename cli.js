@@ -7,7 +7,6 @@
  * --beforeStage {the commands to be executed before the release and after check the conditions}
  * --changelog {the changelog file name, default is 'CHANGELOG.md'}
  * --minorBranch {the minor base branch, default is 'develop'}
- * --npmPublish {If can publish to npm, default is false}
  * --releaseType {The release type 'patch' | 'minor' | 'major', default is empty}
  * --ci {If the environment is on the continuous integration, default is empty}
  */
