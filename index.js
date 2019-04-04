@@ -64,7 +64,7 @@ const publishPatch = (options) => {
       if (err) {
         reject(err)
       } else {
-        console.log(chalk.blue(`Patch version ${chalk.blue.bold(getNewPatchVersion(getNpmVersion()))} published`))
+        console.log(chalk.blue(`Patch version ${chalk.blue.bold(getNpmVersion())} published`))
         resolve()
       }
     })
@@ -78,7 +78,7 @@ const publishMinor = (options) => {
       if (err) {
         reject(err)
       } else {
-        console.log(chalk.blue(`Minor version ${chalk.blue.bold(getNewMinorVersion(getNpmVersion()))} published`))
+        console.log(chalk.blue(`Minor version ${chalk.blue.bold(getNpmVersion())} published`))
         resolve()
       }
     })
@@ -92,7 +92,7 @@ const publishMajor = (options) => {
       if (err) {
         reject(err)
       } else {
-        console.log(chalk.blue(`Major version ${chalk.blue.bold(getNewMajorVersion(getNpmVersion()))} published`))
+        console.log(chalk.blue(`Major version ${chalk.blue.bold(getNpmVersion())} published`))
         resolve()
       }
     })
