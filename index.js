@@ -17,13 +17,13 @@ const getNewPatchVersion = (version) => {
 const getNewMinorVersion = (version) => {
   const nums = version.split('.')
   nums[1] = Number(nums[1]) + 1
-  return nums.join('.')
+  return [nums[0], nums[1], 0].join('.')
 }
 
 const getNewMajorVersion = (version) => {
   const nums = version.split('.')
   nums[0] = Number(nums[0]) + 1
-  return nums.join('.')
+  return [nums[0], 0, 0].join('.')
 }
 
 const getCmdOptions = (releaseMode, options) => {
