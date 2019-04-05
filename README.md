@@ -28,7 +28,7 @@ Automatize your workflow! Use the github-releasy to update you npm version, rele
 #### How it works?
 After a pull request has been updated the github-release checks if the branch has unreleased changes in the CHANGELOD.md, if not, fails the buils.
 
-After a pull request is merged in the github, the event of push event is triggered in the CI and github release check the pattern in the last commit to verify the origin of the pull request and so to decide which the releaseType will be fired and released. Patch if the origin of the pull request is from a branch different of the base branch e Minor if the origin branch is from the minorBranch.
+After a pull request is merged in the github, the push event is triggered in the CI and github-releasy checks the pattern in the last commit to know the origin of the pull request and so to decide which releaseType will be fired and released. Patch if the origin of the pull request is from a branch different of the base branch and Minor if the origin branch is from the minorBranch.
 
 #### Configuration
 
