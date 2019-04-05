@@ -192,6 +192,30 @@ const isSyncWithBase = (options) => {
   })
 }
 
+const execCommand = (command) => {
+  return new Promise(async (resolve, reject) => {
+    exec(command, (err, res) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(res)
+      }
+    })
+  })
+}
+
+const checkGithubEmailAndName = async () => {
+  let email = await execCommand('git config user.email')
+  let name = await execCommand('git config user.name')
+  if (!email) {
+    throw new Error('Set a email through the command: git config --global user.email "<email>"')
+  }
+  if (!name) {
+    throw new Error('Set a name through the command: git config --global user.name "<name>"')
+  }
+  return true
+}
+
 module.exports = {
   getBranchName,
   checkChangelog,
@@ -201,5 +225,6 @@ module.exports = {
   publishMinor,
   publishMajor,
   publishFromCI,
+  checkGithubEmailAndName,
 }
 

@@ -3,10 +3,10 @@
 /**
  * CMD options available:
  * 
- * --baseBranch {the base branch to where must be made the release, default is 'master'}
- * --beforeStage {the commands to be executed before the release and after check the conditions}
- * --changelog {the changelog file name, default is 'CHANGELOG.md'}
- * --minorBranch {the minor base branch, default is 'develop'}
+ * --baseBranch {The base branch to where must be made the release, default is 'master'}
+ * --beforeStage {The commands to be executed before the release and after check the conditions}
+ * --changelog {The changelog file name, default is 'CHANGELOG.md'}
+ * --minorBranch {The minor base branch, default is 'develop'}
  * --releaseType {The release type 'patch' | 'minor' | 'major', default is empty}
  * --ci {If the environment is on the continuous integration, default is empty}
  */
@@ -25,6 +25,7 @@
       if (!isSyncWithBase) {
         throw new Error('Cannot proceed with release. Branch is not sync with master')
       }
+      await GithubReleasy.checkGithubEmailAndName()
       switch(releaseType) {
         case 'patch':
           await GithubReleasy.publishPatch(options)
@@ -48,6 +49,7 @@
         console.log(chalk.yellow(`CHANGELOG.md is OK!`))
       // Otherwise is from a push in the baseBranch
       } else {
+        await GithubReleasy.checkGithubEmailAndName()
         console.log(chalk.yellow(`Build is from a push event`))
         if (!GithubReleasy.hasUnreleased(options)) {
           console.log(chalk.red('Will not publish because there isn\'t unreleased changes in changelog.'))
